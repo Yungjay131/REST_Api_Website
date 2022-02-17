@@ -1,0 +1,42 @@
+{
+  "name": "rest-api-website",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "tsc -p client && tsc -p server",
+    "start": "node ./build/server/server.js",
+    "build-client": "tsc -p client && npm run build-client-login",
+    "build-client-login": "tsc ./client/login.ts --outDir ./client/public/js && npm run browserify",
+    "build-server": "tsc -p server",
+    "install": "npm-run-all package",
+    "dev": "npm-run-all --parallel build-client build-server && node ./build/server/server.js",
+    "babel": "babel ./client/public/js/login.js --out-dir ./client/public/js",
+    "browserify": "browserify ./client/public/js/login.js > ./client/public/js/login.bundled.js"
+  },
+  "author": "Joshua Sylvanus",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "browserify": "^17.0.0",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/jquery": "^3.5.9",
+    "@types/typescript": "^2.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "firebase": "^9.5.0",
+    "mongoose": "^6.0.14",
+    "path": "^0.12.7"
+  },
+  "browser": {
+    "jquery": "./client/public/js/jquery-3.6.0.js"
+  }
+}
